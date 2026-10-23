@@ -1,0 +1,57 @@
+# Quality check (business spec BR-11): runs on every PR and before every deploy.
+name: Quality check
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Tests, links and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Unit tests (content parity, no phone, renderers, pipeline)
+        run: npm test
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end and accessibility tests
+        run: npm run test:e2e
+
+      - name: Link check
+        run: npm run check:links
+
+      - name: Build site
+        run: npm run build
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+      - name: Keep the built site for the deploy job
+        uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: _site/
+          include-hidden-files: true
+          retention-days: 1

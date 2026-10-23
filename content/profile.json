@@ -1,0 +1,59 @@
+{
+  "name": "Harlin Acero",
+  "email": "harlinacero@gmail.com",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/harlinacero",
+    "github": "https://github.com/harlinacero"
+  },
+  "photo": "assets/img/harlin-acero.jpg",
+  "cv": {
+    "en": "assets/cv/harlin-acero-cv-en.pdf",
+    "es": "assets/cv/harlin-acero-cv-es.pdf"
+  },
+  "leadership": ["team", "architecture", "scale", "users", "delivery", "visibility"],
+  "experience": [
+    {
+      "id": "mercadolibre",
+      "company": "Mercado Libre",
+      "location": "Bogotá, Colombia",
+      "roles": [{ "id": "senior", "start": "2025-04", "end": "2026-09" }]
+    },
+    {
+      "id": "siigo",
+      "company": "Siigo",
+      "location": "Bogotá, Colombia",
+      "roles": [{ "id": "seniorFullStack", "start": "2022-07", "end": "2025-04" }]
+    },
+    {
+      "id": "digitalware",
+      "company": "Digitalware",
+      "location": "Bogotá, Colombia",
+      "roles": [
+        { "id": "techLead", "start": "2021-02", "end": "2022-07" },
+        { "id": "senior", "start": "2019-02", "end": "2021-02" },
+        { "id": "junior", "start": "2018-05", "end": "2019-02" }
+      ]
+    },
+    {
+      "id": "piv",
+      "company": "PIV Ingeniería",
+      "location": "Bogotá, Colombia",
+      "roles": [{ "id": "analyst", "start": "2017-01", "end": "2018-05" }]
+    }
+  ],
+  "skills": ["architecture", "leadership", "cloud", "messaging", "languages", "observability", "quality"],
+  "education": [
+    { "id": "msc", "institution": "Broward International University", "start": 2023, "end": 2025 },
+    { "id": "dbSpecialization", "institution": "Fundación Universidad de Bogotá Jorge Tadeo Lozano", "end": 2019 },
+    { "id": "systemsEngineering", "institution": "Fundación Universitaria Konrad Lorenz", "start": 2014, "end": 2018, "hasProject": true },
+    { "id": "philosophy", "institution": "Universidad Católica Luis Amigó", "start": 2008, "end": 2012 }
+  ],
+  "certifications": [
+    { "id": "az900", "status": "done" },
+    { "id": "architecture", "status": "done" },
+    { "id": "scrum", "status": "done" },
+    { "id": "az104", "status": "inProgress" },
+    { "id": "az305", "status": "inProgress" }
+  ],
+  "languages": ["spanish", "english"]
+}

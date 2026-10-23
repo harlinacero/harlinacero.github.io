@@ -1,88 +1,98 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,user-scalable=no">
-  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
-  <title>Calculadora</title>
-  <link rel="stylesheet" href="css/estilos.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Harlin Acero · Software Engineer &amp; Software Architect</title>
+  <meta name="description" content="Software Engineer &amp; Software Architect with 10+ years building enterprise systems with .NET, Angular, Azure and microservices. Tech Lead experience, architecture case studies and projects.">
+  <meta name="author" content="Harlin Acero">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#070a14">
+  <link rel="canonical" href="https://harlinacero.github.io/">
+  <link rel="alternate" hreflang="en" href="https://harlinacero.github.io/?lang=en">
+  <link rel="alternate" hreflang="es" href="https://harlinacero.github.io/?lang=es">
+  <link rel="alternate" hreflang="x-default" href="https://harlinacero.github.io/">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Harlin Acero">
+  <meta property="og:title" content="Harlin Acero · Software Engineer &amp; Software Architect">
+  <meta property="og:description" content="10+ years · Tech Lead · Microservices · Cloud (Azure). Architecture case studies and public projects.">
+  <meta property="og:url" content="https://harlinacero.github.io/">
+  <meta property="og:image" content="https://harlinacero.github.io/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_CO">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/effects.css">
+  <script type="module" src="assets/js/main.js"></script>
 </head>
 <body>
-  <div class="fondo">
-    <div class="titulo-container">
-      <h1>¡No pierdas <span>la cuenta!</span></h1>
-    </div>
-
-    <div class="notas-container">
-      <h2>Tus apuntes...</h2>
-      <textarea class="nota-input" placeholder="Escribe aquí..."></textarea>
-    </div>
-
-    <div id="calculadoraFondo">
-      <div class="pantalla">
-        <span id="display">0</span>
-      </div>
-
-      <div class="teclado">
-        <img src="image/ON.png" alt="On" class="tecla" id="on"/>
-        <img src="image/sign.png" alt="signo" class="tecla" id="sign"/>
-        <img src="image/raiz.png" alt="raiz" class="tecla" id="raiz"/>
-        <img src="image/dividido.png" alt="dividido" class="tecla divide" id="dividido"/>
-
-        <img src="image/7.png" alt="7" class="tecla" id="7"/>
-        <img src="image/8.png" alt="8" class="tecla" id="8"/>
-        <img src="image/9.png" alt="9" class="tecla" id="9"/>
-        <img src="image/por.png" alt="por" class="tecla multiplica" id="por"/>
-
-        <img src="image/4.png" alt="4" class="tecla" id="4"/>
-        <img src="image/5.png" alt="5" class="tecla" id="5"/>
-        <img src="image/6.png" alt="6" class="tecla" id="6"/>
-        <img src="image/menos.png" alt="menos" class="tecla resta" id="menos"/>
-
-        <div class="row">
-          <div class="col1">
-            <img src="image/1.png" alt="1" class="tecla" id="1"/>
-            <img src="image/2.png" alt="2" class="tecla" id="2"/>
-            <img src="image/3.png" alt="3" class="tecla" id="3"/>
-
-            <img src="image/0.png" alt="0" class="tecla" id="0"/>
-            <img src="image/punto.png" alt="punto" class="tecla" id="punto"/>
-            <img src="image/igual.png" alt="igual" class="tecla" id="igual"/>
-          </div>
-          <div class="col2">
-            <img src="image/mas.png" alt="mas" class="tecla suma" id="mas"/>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="container-libreta">
-      <div class="libreta">
-        <div class="contenido-ingresos">
-          <h3>Ingresos</h3>
-          <ul>
-            <li><span>Salario: </span>$1300.00</li>
-            <li><span>Bonificación: </span>$200.00</li>
-          </ul>
-        </div>
-        <div class="contenido-egresos">
-          <h3>Egresos</h3>
-          <ul>
-            <li><span>Renta: </span>$300.00</li>
-            <li><span>Alimentos: </span>$250.00</li>
-            <li><span>Restaurantes: </span>$120.00</li>
-            <li><span>Automóvil: </span>$100.00</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop__grid"></div>
+    <div class="backdrop__glow backdrop__glow--cyan"></div>
+    <div class="backdrop__glow backdrop__glow--violet"></div>
   </div>
-  <script src="js/app.js"></script>
+
+  <a class="skip-link" href="#main" data-i18n="ui.skipToContent">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="site-header__inner">
+      <a class="brand" href="#hero">
+        <span class="brand__mark" aria-hidden="true">HA</span>
+        <span class="brand__name">Harlin Acero</span>
+      </a>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <!-- Filled by assets/js/render/index.js › renderNav -->
+      </nav>
+      <div class="site-header__actions">
+        <button type="button" class="lang-toggle" id="lang-toggle" hidden>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#globe"></use></svg>
+          <span class="lang-toggle__label"></span>
+        </button>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav" hidden>
+          <span class="menu-toggle__bar" aria-hidden="true"></span>
+          <span class="menu-toggle__bar" aria-hidden="true"></span>
+          <span class="menu-toggle__bar" aria-hidden="true"></span>
+          <span class="visually-hidden menu-toggle__label"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" aria-busy="true">
+    <div class="loader" aria-hidden="true"><span></span><span></span><span></span></div>
+  </main>
+
+  <div class="load-error glass" id="load-error" role="alert" hidden></div>
+
+  <noscript>
+    <div class="noscript glass">
+      <h1>Harlin Acero</h1>
+      <p class="noscript__headline">Software Engineer &amp; Software Architect · Ingeniero de Software y Arquitecto de Software</p>
+      <p>10+ years · Tech Lead · Microservices · Cloud (Azure)</p>
+      <ul class="noscript__links">
+        <li><a href="https://www.linkedin.com/in/harlinacero" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://github.com/harlinacero" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="assets/cv/harlin-acero-cv-en.pdf" download>CV (English, PDF)</a></li>
+        <li><a href="assets/cv/harlin-acero-cv-es.pdf" download>CV (Español, PDF)</a></li>
+      </ul>
+    </div>
+  </noscript>
+
+  <footer class="site-footer">
+    <p class="site-footer__built" data-i18n="ui.footer.builtWith"></p>
+    <p class="site-footer__copy">© <span id="year">2026</span> Harlin Acero</p>
+  </footer>
 </body>
 </html>
