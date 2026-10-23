@@ -1,0 +1,123 @@
+[
+  {
+    "id": "microservicesDemo",
+    "projectId": "microservicesDemo",
+    "repo": "https://github.com/harlinacero/Microservices.Demo",
+    "layers": [
+      { "id": "client", "nodes": [{ "id": "web", "tech": "Angular 14 · Nginx" }] },
+      { "id": "edge", "nodes": [{ "id": "gateway", "tech": "ASP.NET Core · Ocelot · JWT" }] },
+      {
+        "id": "services",
+        "nodes": [
+          { "id": "auth", "tech": ".NET 6 · JWT" },
+          { "id": "product", "tech": ".NET 6 · EF Core" },
+          { "id": "pricing", "tech": ".NET 6 · Marten" },
+          { "id": "policy", "tech": ".NET 6" },
+          { "id": "report", "tech": ".NET 6" }
+        ]
+      },
+      { "id": "messaging", "nodes": [{ "id": "rabbit", "tech": "RabbitMQ" }] },
+      {
+        "id": "data",
+        "nodes": [
+          { "id": "authDb", "tech": "MongoDB", "ownedBy": "auth" },
+          { "id": "productDb", "tech": "SQL Server", "ownedBy": "product" },
+          { "id": "pricingDb", "tech": "PostgreSQL", "ownedBy": "pricing" },
+          { "id": "policyDb", "tech": "SQL Server", "ownedBy": "policy" }
+        ]
+      },
+      {
+        "id": "platform",
+        "nodes": [
+          { "id": "config", "tech": "Spring Cloud Config · Git" },
+          { "id": "discovery", "tech": "Eureka" },
+          { "id": "observability", "tech": "ELK · APM · Jaeger" }
+        ]
+      }
+    ],
+    "interactions": [
+      { "id": "i1", "from": ["web"], "to": ["gateway"], "kind": "sync" },
+      { "id": "i2", "from": ["gateway"], "to": ["auth", "product", "pricing", "policy", "report"], "kind": "sync" },
+      { "id": "i3", "from": ["policy"], "to": ["pricing"], "kind": "sync" },
+      { "id": "i4", "from": ["policy"], "to": ["rabbit"], "kind": "async" },
+      { "id": "i5", "from": ["report"], "to": ["product", "policy"], "kind": "sync" },
+      { "id": "i6", "from": ["gateway", "auth", "product", "pricing", "policy", "report"], "to": ["config"], "kind": "config" },
+      { "id": "i7", "from": ["gateway", "auth", "product", "pricing", "policy", "report"], "to": ["discovery"], "kind": "config" },
+      { "id": "i8", "from": ["gateway", "auth", "product", "pricing", "policy", "report"], "to": ["observability"], "kind": "telemetry" }
+    ],
+    "decisions": ["d1", "d2", "d3", "d4", "d5"],
+    "qualities": ["scalability", "modifiability", "observability", "security"]
+  },
+  {
+    "id": "employeeAttendanceControl",
+    "projectId": "employeeAttendanceControl",
+    "repo": "https://github.com/harlinacero/EmployeeAttendanceControl",
+    "layers": [
+      { "id": "client", "nodes": [{ "id": "client", "tech": "REST · Swagger" }] },
+      { "id": "edge", "nodes": [{ "id": "gateway", "tech": "Ocelot · JWT · roles" }] },
+      {
+        "id": "services",
+        "nodes": [
+          { "id": "users", "tech": ".NET 10 · MediatR" },
+          { "id": "employees", "tech": ".NET 10 · MediatR · Refit" },
+          { "id": "attendances", "tech": ".NET 10 · MediatR" }
+        ]
+      },
+      { "id": "messaging", "nodes": [{ "id": "rabbit", "tech": "RabbitMQ · durable queues" }] },
+      {
+        "id": "data",
+        "nodes": [
+          { "id": "cassandra", "tech": "Cassandra", "ownedBy": "users" },
+          { "id": "sql", "tech": "SQL Server · Dapper", "ownedBy": "employees" },
+          { "id": "mongo", "tech": "MongoDB", "ownedBy": "attendances" }
+        ]
+      }
+    ],
+    "interactions": [
+      { "id": "i1", "from": ["client"], "to": ["gateway"], "kind": "sync" },
+      { "id": "i2", "from": ["gateway"], "to": ["users"], "kind": "sync" },
+      { "id": "i3", "from": ["gateway"], "to": ["employees"], "kind": "sync" },
+      { "id": "i4", "from": ["gateway"], "to": ["attendances"], "kind": "sync" },
+      { "id": "i5", "from": ["employees"], "to": ["rabbit"], "kind": "async" },
+      { "id": "i6", "from": ["rabbit"], "to": ["users"], "kind": "async" },
+      { "id": "i7", "from": ["rabbit"], "to": ["attendances"], "kind": "async" },
+      { "id": "i8", "from": ["employees"], "to": ["attendances"], "kind": "sync" }
+    ],
+    "decisions": ["d1", "d2", "d3", "d4", "d5"],
+    "qualities": ["security", "maintainability", "testability", "consistency"]
+  },
+  {
+    "id": "eCommerceMajestic",
+    "projectId": "eCommerceMajestic",
+    "repo": "https://github.com/harlinacero/e-commerce-majestic-full",
+    "layers": [
+      { "id": "client", "nodes": [{ "id": "spa", "tech": "Angular 16" }] },
+      { "id": "edge", "nodes": [{ "id": "alb", "tech": "AWS Application Load Balancer" }] },
+      { "id": "services", "nodes": [{ "id": "api", "tech": "Go · gorilla/mux · GORM · JWT" }] },
+      {
+        "id": "data",
+        "nodes": [
+          { "id": "mysql", "tech": "MySQL · AWS RDS", "ownedBy": "api" },
+          { "id": "mongo", "tech": "MongoDB", "ownedBy": "api" }
+        ]
+      },
+      {
+        "id": "platform",
+        "nodes": [
+          { "id": "ecs", "tech": "AWS ECS · ECR · Docker" },
+          { "id": "openai", "tech": "OpenAI API" }
+        ]
+      }
+    ],
+    "interactions": [
+      { "id": "i1", "from": ["spa"], "to": ["alb"], "kind": "sync" },
+      { "id": "i2", "from": ["alb"], "to": ["api"], "kind": "sync" },
+      { "id": "i3", "from": ["api"], "to": ["mysql"], "kind": "sync" },
+      { "id": "i4", "from": ["api"], "to": ["mongo"], "kind": "sync" },
+      { "id": "i5", "from": ["ecs"], "to": ["spa", "api"], "kind": "config" },
+      { "id": "i6", "from": ["spa"], "to": ["openai"], "kind": "sync" }
+    ],
+    "decisions": ["d1", "d2", "d3", "d4", "d5"],
+    "qualities": ["deployability", "scalability", "security"]
+  }
+]

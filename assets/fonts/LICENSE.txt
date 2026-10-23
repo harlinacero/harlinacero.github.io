@@ -1,0 +1,6 @@
+Fonts in this folder are self-hosted copies (latin subset, variable weight) obtained from Fontsource.
+All are licensed under the SIL Open Font License, Version 1.1 — https://openfontlicense.org
+
+- Space Grotesk — Copyright 2020 The Space Grotesk Project Authors (https://github.com/floriankarsten/space-grotesk)
+- Inter — Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
+- JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)

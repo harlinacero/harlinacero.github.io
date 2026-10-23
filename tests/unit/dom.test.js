@@ -1,0 +1,57 @@
+import { describe, it, expect, vi } from 'vitest';
+import { h, externalLink } from '../../assets/js/dom.js';
+
+describe('h', () => {
+  it('should set text without interpreting html when given markup', () => {
+    // Arrange
+    const markup = '<img src=x onerror="alert(1)">';
+
+    // Act
+    const element = h('p', {}, markup);
+
+    // Assert
+    expect(element.textContent).toBe(markup);
+    expect(element.querySelector('img')).toBeNull();
+  });
+
+  it('should set attributes, skip empty ones and append nested children', () => {
+    // Arrange / Act
+    const element = h('div', { class: 'card', id: 'x', hidden: false, 'aria-label': null, 'data-id': 'p1' },
+      h('span', {}, 'a'), null, ['b', h('em', {}, 'c')]);
+
+    // Assert
+    expect(element.className).toBe('card');
+    expect(element.id).toBe('x');
+    expect(element.hasAttribute('hidden')).toBe(false);
+    expect(element.hasAttribute('aria-label')).toBe(false);
+    expect(element.dataset.id).toBe('p1');
+    expect(element.textContent).toBe('abc');
+  });
+
+  it('should register event listeners when given on handlers', () => {
+    // Arrange
+    const onClick = vi.fn();
+    const button = h('button', { onClick }, 'Go');
+
+    // Act
+    button.click();
+
+    // Assert
+    expect(onClick).toHaveBeenCalledOnce();
+    expect(button.hasAttribute('onClick')).toBe(false);
+  });
+});
+
+describe('externalLink', () => {
+  it('should add target blank and noopener when building an external link', () => {
+    // Arrange / Act
+    const link = externalLink('https://github.com/harlinacero', 'GitHub', { newTabLabel: '(opens in a new tab)' });
+
+    // Assert
+    expect(link.getAttribute('href')).toBe('https://github.com/harlinacero');
+    expect(link.getAttribute('target')).toBe('_blank');
+    expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+    expect(link.textContent).toContain('GitHub');
+    expect(link.querySelector('.visually-hidden').textContent.trim()).toBe('(opens in a new tab)');
+  });
+});

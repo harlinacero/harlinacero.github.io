@@ -1,0 +1,490 @@
+{
+  "meta": {
+    "title": "Harlin Acero · Ingeniero de Software y Arquitecto de Software",
+    "description": "Ingeniero de Software y Arquitecto de Software con más de 10 años construyendo sistemas empresariales con .NET, Angular, Azure y microservicios. Experiencia como Tech Lead, casos de estudio de arquitectura y proyectos."
+  },
+  "ui": {
+    "skipToContent": "Saltar al contenido",
+    "menu": {
+      "open": "Abrir menú",
+      "close": "Cerrar menú"
+    },
+    "nav": {
+      "label": "Navegación principal",
+      "leadership": "Liderazgo",
+      "about": "Perfil",
+      "architecture": "Arquitectura",
+      "experience": "Experiencia",
+      "skills": "Habilidades",
+      "projects": "Proyectos",
+      "education": "Educación",
+      "contact": "Contacto"
+    },
+    "language": {
+      "switchTo": "EN",
+      "switchToLabel": "View the site in English"
+    },
+    "actions": {
+      "viewCode": "Ver código",
+      "liveDemo": "Demo en vivo",
+      "architecture": "Arquitectura",
+      "downloadCv": "Descargar CV",
+      "downloadCvFallback": "Descargar CV (Español)",
+      "copyEmail": "Copiar email",
+      "emailCopied": "Email copiado al portapapeles",
+      "copyFailed": "Presiona Ctrl+C para copiar la dirección seleccionada",
+      "sendEmail": "Enviar un email",
+      "seeProjects": "Ver proyectos",
+      "contactMe": "Contáctame",
+      "allRepositories": "Ver todos los repositorios en GitHub",
+      "opensInNewTab": "(se abre en una pestaña nueva)"
+    },
+    "sections": {
+      "leadership": {
+        "title": "Liderazgo y arquitectura",
+        "subtitle": "Evidencia de diseñar sistemas y liderar a las personas que los construyen."
+      },
+      "about": {
+        "title": "Sobre mí"
+      },
+      "architecture": {
+        "title": "Casos de estudio de arquitectura",
+        "subtitle": "Cómo diseño sistemas: contexto, estructura, decisiones y los trade-offs detrás de ellas."
+      },
+      "experience": {
+        "title": "Experiencia",
+        "subtitle": "Más de 10 años entregando software empresarial, de desarrollador a Tech Lead."
+      },
+      "skills": {
+        "title": "Habilidades"
+      },
+      "projects": {
+        "title": "Proyectos destacados",
+        "subtitle": "Repositorios públicos que puedes abrir, leer y ejecutar."
+      },
+      "education": {
+        "title": "Educación"
+      },
+      "certifications": {
+        "title": "Certificaciones"
+      },
+      "languages": {
+        "title": "Idiomas"
+      },
+      "contact": {
+        "title": "Hablemos",
+        "subtitle": "Abierto a conversar sobre arquitectura de software, liderazgo técnico y roles de ingeniería senior."
+      }
+    },
+    "caseStudy": {
+      "context": "Contexto",
+      "diagram": "Diagrama de arquitectura",
+      "diagramDescription": "Descripción en texto del diagrama",
+      "components": "Componentes",
+      "interactions": "Interacciones",
+      "decisions": "Decisiones clave",
+      "decision": "Decisión",
+      "tradeOff": "Trade-off",
+      "qualities": "Atributos de calidad",
+      "panHint": "Desliza para explorar el diagrama",
+      "ownedBy": "de"
+    },
+    "layers": {
+      "client": "Clientes",
+      "edge": "Borde",
+      "services": "Servicios",
+      "messaging": "Mensajería",
+      "data": "Datos",
+      "platform": "Plataforma"
+    },
+    "interactionKinds": {
+      "sync": "síncrona",
+      "async": "asíncrona",
+      "config": "configuración",
+      "telemetry": "telemetría"
+    },
+    "qualities": {
+      "scalability": "Escalabilidad",
+      "modifiability": "Modificabilidad",
+      "observability": "Observabilidad",
+      "security": "Seguridad",
+      "maintainability": "Mantenibilidad",
+      "testability": "Testeabilidad",
+      "consistency": "Consistencia",
+      "deployability": "Desplegabilidad"
+    },
+    "experience": {
+      "progression": "Progresión de carrera"
+    },
+    "education": {
+      "degreeProject": "Proyecto de grado"
+    },
+    "certifications": {
+      "inProgress": "En preparación"
+    },
+    "footer": {
+      "builtWith": "Hecho con HTML, CSS y JavaScript · Probado con Vitest y Playwright · Desplegado con GitHub Actions"
+    }
+  },
+  "profile": {
+    "headline": "Ingeniero de Software y Arquitecto de Software",
+    "tagline": "+10 años · Tech Lead · Microservicios · Cloud (Azure)",
+    "location": "Bogotá, Colombia",
+    "photoAlt": "Retrato de Harlin Acero",
+    "pitch": "Diseño y construyo sistemas distribuidos que escalan, y lidero a los equipos que los operan en producción.",
+    "typing": [
+      "diseñando sistemas distribuidos",
+      "liderando equipos de ingeniería",
+      "entregando .NET · Angular · Azure"
+    ],
+    "summary": [
+      "Ingeniero de Software y Arquitecto de Software con más de 10 años diseñando y construyendo sistemas empresariales. Como Tech Lead lideré a más de 6 desarrolladores, definí el roadmap anual de las aplicaciones a mi cargo y documenté la arquitectura de más de 10 microaplicaciones; llevo las iniciativas de punta a punta, desde los requerimientos y el diseño del sistema hasta el monitoreo en producción.",
+      "Mi base es .NET/C# y Angular sobre Azure, con microservicios y arquitecturas orientadas a eventos (Kafka, RabbitMQ, Azure Service Bus, gRPC), y trabajo reciente con Java y Spring Boot en Mercado Libre. Me importan la observabilidad, el CI/CD y los controles de calidad, y ayudar a crecer a los ingenieros a mi alrededor con mentoría y code reviews.",
+      "Máster en Computer Software Engineering, actualmente preparando la certificación Azure Solutions Architect Expert (AZ-305). Español nativo, inglés profesional (B2)."
+    ]
+  },
+  "leadership": {
+    "team": {
+      "metric": "6+",
+      "title": "Desarrolladores liderados",
+      "text": "Como Tech Lead en Digitalware guié el diseño, desarrollo y entrega de las aplicaciones de la plataforma principal, con mentoría y code reviews."
+    },
+    "architecture": {
+      "metric": "10+",
+      "title": "Microaplicaciones documentadas",
+      "text": "Documenté la arquitectura de Ophelia Suite y aporté a las decisiones técnicas de diseño de APIs, integraciones y Single Sign-On."
+    },
+    "scale": {
+      "metric": "60K",
+      "title": "Solicitudes diarias en picos",
+      "text": "Lideré de punta a punta el proyecto de productización en Mercado Libre, procesando todas las solicitudes de productización sin fallos."
+    },
+    "users": {
+      "metric": "300K+",
+      "title": "Usuarios atendidos",
+      "text": "Lideré de punta a punta la iniciativa del Anexo 1.9 de facturación electrónica DIAN en Siigo: requerimientos, diseño, salida a producción y monitoreo."
+    },
+    "delivery": {
+      "metric": "CI/CD",
+      "title": "De manual a automatizado",
+      "text": "Implementé pipelines en Azure DevOps que reemplazaron los despliegues manuales en servidores on-premise, con versionamiento y controles de calidad."
+    },
+    "visibility": {
+      "metric": "3×/día",
+      "title": "Resultados visibles",
+      "text": "Construí una capa de medición (Python, BigQuery, Looker Studio) para un proceso asíncrono que antes no tenía visibilidad."
+    }
+  },
+  "experience": {
+    "mercadolibre": {
+      "team": "Equipo de Catálogo y Buybox",
+      "roles": {
+        "senior": {
+          "title": "Senior Software Engineer",
+          "achievements": [
+            "Desarrollé y evolucioné microservicios en Java y Spring Boot que asocian publicaciones de sellers con productos de la vitrina del marketplace.",
+            "Lideré de punta a punta el proyecto de productización, desde los requerimientos hasta el monitoreo en producción, operando un proceso con picos de 60.000 solicitudes de productización diarias, todas procesadas sin fallos.",
+            "Construí la capa de medición de resultados de este proceso asíncrono (scripts en Python, BigQuery y un dashboard de Looker Studio actualizado 3 veces al día), que hizo visible qué solicitudes no quedaban productizadas por validaciones internas y de otros equipos, donde antes no existía visibilidad.",
+            "Escalé hallazgos a los equipos responsables para detectar puntos de fallo y oportunidades de mejora.",
+            "Trabajé con colas y streaming (Fury) en una arquitectura de microservicios distribuida y orientada a eventos; integré fuentes NoSQL hacia tablas de solo lectura en BigQuery.",
+            "Monitoreé producción con Datadog y Grafana: construí dashboards y analicé métricas y logs.",
+            "Participé en la rotación de guardias 24/7: investigué incidentes en producción, apliqué mitigaciones temporales mientras encontraba el problema real y entregué correcciones de causa raíz.",
+            "Guié y revisé el trabajo de ingenieros menos senior (funcionalidades, depuración, optimización, pull requests) y fui buddy de onboarding de un nuevo compañero."
+          ]
+        }
+      }
+    },
+    "siigo": {
+      "team": "Soluciones de contabilidad y facturación electrónica para más de 300.000 usuarios",
+      "roles": {
+        "seniorFullStack": {
+          "title": "Senior Full Stack Software Engineer",
+          "achievements": [
+            "Contribuí a mejorar los tiempos de respuesta de la contabilización de la factura de venta en microservicios .NET, Azure Functions, Kafka y gRPC, con patrones de comunicación orientados a eventos.",
+            "Lideré de punta a punta la iniciativa del Anexo 1.9 de facturación electrónica DIAN: requerimientos, diseño del sistema, cambios (Angular, VB), desarrollo, salida a producción y monitoreo de resultados.",
+            "Atendí volúmenes en hora pico de 12.000 a 60.000 transacciones, con carga adicional en fechas como Black Friday.",
+            "Inicié el proyecto de creación y administración de presupuestos contables (React).",
+            "Contribuí a las prácticas de CI/CD y DevOps con Azure DevOps, controles de calidad con SonarQube y manejo y rotación de secretos con Azure Key Vault.",
+            "Usé colas de Azure Service Bus como respaldo de Kafka; trabajé con Azure SQL Database, Docker (ambiente local, pruebas end-to-end entre microservicios) y Kubernetes (despliegues, escalamiento, troubleshooting).",
+            "Apoyé a mis compañeros con code reviews y lideré el equipo en ausencia de mi jefe."
+          ]
+        }
+      }
+    },
+    "digitalware": {
+      "team": "Plataforma empresarial Ophelia Suite",
+      "roles": {
+        "techLead": {
+          "title": "Coordinador de Desarrollo (Tech Lead)",
+          "achievements": [
+            "Lideré a más de 6 desarrolladores, guiándolos en el diseño, desarrollo e implementación de las aplicaciones de la plataforma principal, incluidos paquetes NuGet y aplicaciones base.",
+            "Propuse el roadmap anual e impulsé sus iniciativas para las aplicaciones a mi cargo.",
+            "Hice mentoría a desarrolladores, realicé code reviews y apliqué estándares; aporté a las decisiones técnicas de diseño de APIs, integraciones y arquitectura.",
+            "Implementé CI/CD con Azure DevOps, reemplazando despliegues manuales en servidores on-premise, y gestioné el versionamiento de las aplicaciones.",
+            "Documenté la arquitectura de más de 10 microaplicaciones de Ophelia Suite (backend .NET, frontend Angular con DevExpress).",
+            "Integré otros productos de la compañía mediante microservicios y Single Sign-On (JWT, OAuth2); implementé requisitos de seguridad tras una revisión de hacking ético; diseñé y entregué nuevos productos de la plataforma."
+          ]
+        },
+        "senior": {
+          "title": "Desarrollador de Software Sénior",
+          "achievements": [
+            "Lideré la célula de Business Intelligence y fui desarrollador principal de la aplicación de BI de la compañía.",
+            "Rediseñé y optimicé el módulo de reportes de la plataforma principal; integré Google Drive como fuente de datos."
+          ]
+        },
+        "junior": {
+          "title": "Desarrollador de Software Junior",
+          "achievements": [
+            "Desarrollé el módulo de reportes y acceso a datos, y servicios Web API REST para la vertical de aportes de caja de compensación."
+          ]
+        }
+      }
+    },
+    "piv": {
+      "team": "Software de control de parqueaderos para municipios",
+      "roles": {
+        "analyst": {
+          "title": "Analista de Desarrollo de Software",
+          "achievements": [
+            "Rediseñé por completo la aplicación de control de parqueaderos: de una aplicación legada en ADO.NET sin frontend a ASP.NET MVC (Razor).",
+            "Creé la API REST para la aplicación móvil y desarrollé la base de datos principal (funciones, triggers).",
+            "Implementé versiones periódicas del software en 4 municipios."
+          ]
+        }
+      }
+    }
+  },
+  "skills": {
+    "architecture": {
+      "title": "Arquitectura",
+      "items": ["Microservicios", "Arquitectura orientada a eventos", "Sistemas distribuidos", "Clean Architecture", "CQRS", "Patrones de diseño", "REST", "gRPC", "API Gateway"]
+    },
+    "leadership": {
+      "title": "Liderazgo",
+      "items": ["Diseño técnico", "Decisiones de arquitectura", "Mentoría", "Code reviews", "Roadmaps", "Estándares de ingeniería", "Guardias y respuesta a incidentes"]
+    },
+    "cloud": {
+      "title": "Cloud y DevOps",
+      "items": ["Azure Functions", "Azure Key Vault", "Azure SQL", "Azure Service Bus", "Azure DevOps", "AWS ECS", "Docker", "Kubernetes", "GitHub Actions", "SonarQube"]
+    },
+    "messaging": {
+      "title": "Mensajería y datos",
+      "items": ["Kafka", "RabbitMQ", "Azure Service Bus", "SQL Server", "PostgreSQL", "MongoDB", "Cassandra", "BigQuery"]
+    },
+    "languages": {
+      "title": "Lenguajes y frameworks",
+      "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "TypeScript", "Angular", "React", "Java", "Spring Boot", "Go", "Python"]
+    },
+    "observability": {
+      "title": "Observabilidad y BI",
+      "items": ["Datadog", "Grafana", "ELK Stack", "Jaeger", "Looker Studio"]
+    },
+    "quality": {
+      "title": "Pruebas y seguridad",
+      "items": ["xUnit", "JUnit", "Jasmine", "Pruebas de integración", "JMeter", "JWT", "OAuth2", "Manejo de secretos"]
+    }
+  },
+  "projects": {
+    "microservicesDemo": {
+      "description": "Plataforma de seguros dividida en servicios de Auth, Productos, Precios, Pólizas y Reportes detrás de un API Gateway, con descubrimiento de servicios, configuración centralizada, mensajería y observabilidad completa. Cliente en Angular, todo contenerizado.",
+      "demonstrates": "Microservicios · API Gateway · Descubrimiento de servicios · Configuración externalizada · Observabilidad"
+    },
+    "employeeAttendanceControl": {
+      "description": "Microservicios en .NET 10 para empleados, usuarios e historial de asistencias: gateway con JWT por roles, eventos con RabbitMQ y almacenamiento elegido por servicio (Cassandra, SQL Server, MongoDB), construido spec-first con Clean Architecture y CQRS.",
+      "demonstrates": "Diseño orientado a eventos · Defensa en profundidad · Persistencia políglota · Desarrollo guiado por especificaciones"
+    },
+    "eCommerceMajestic": {
+      "description": "E-commerce con roles de administrador, vendedor y comprador, carrito de compras y un chatbot con IA: API REST en Go, SPA en Angular 16, MySQL y MongoDB, desplegado con contenedores en AWS detrás de balanceadores de carga.",
+      "demonstrates": "Monolito modular · Acceso por roles · Despliegue en la nube con AWS"
+    },
+    "easyReportsIA": {
+      "description": "Reportes en lenguaje natural: describes el reporte que necesitas y la API lee el esquema de la base de datos, le pide el SQL a un LLM, lo ejecuta y devuelve los datos. API .NET por capas más un frontend en React.",
+      "demonstrates": "Integración de IA generativa · Arquitectura por capas",
+      "repoLabels": {
+        "main": "API (.NET)",
+        "easyreports": "Aplicación web (React)"
+      }
+    },
+    "medicalcenter": {
+      "description": "Gestión de citas médicas para médicos y pacientes: frontend en React y API en .NET 8 con una arquitectura de N capas orientada al dominio, con mapas de navegación y pruebas.",
+      "demonstrates": "Capas orientadas al dominio · Entrega full-stack"
+    }
+  },
+  "caseStudies": {
+    "microservicesDemo": {
+      "title": "Microservices.Demo — plataforma de seguros",
+      "context": "Una plataforma de seguros donde la autenticación, el catálogo de productos, los precios, las pólizas y los reportes evolucionan y escalan de forma independiente. El objetivo era mostrar, de punta a punta, las piezas que necesita una plataforma real de microservicios: un único punto de entrada, descubrimiento de servicios, configuración centralizada, mensajería asíncrona y observabilidad.",
+      "nodes": {
+        "web": "Cliente web",
+        "gateway": "API Gateway",
+        "auth": "Servicio de Auth",
+        "product": "Servicio de Productos",
+        "pricing": "Servicio de Precios",
+        "policy": "Servicio de Pólizas",
+        "report": "Servicio de Reportes",
+        "rabbit": "Broker de mensajes",
+        "authDb": "Almacén de usuarios",
+        "productDb": "Almacén de productos",
+        "pricingDb": "Almacén de precios",
+        "policyDb": "Almacén de pólizas",
+        "config": "Config Server",
+        "discovery": "Descubrimiento de servicios",
+        "observability": "Logs, métricas y trazas"
+      },
+      "interactions": {
+        "i1": "llama a todas las APIs a través del gateway con un JWT",
+        "i2": "enruta las solicitudes a los servicios encontrados en el registro",
+        "i3": "calcula el precio de una póliza",
+        "i4": "publica eventos de pólizas",
+        "i5": "compone reportes a partir de productos y pólizas",
+        "i6": "carga rutas y configuración al iniciar",
+        "i7": "registra y descubre instancias de servicios",
+        "i8": "envían logs estructurados, datos de APM y trazas"
+      },
+      "decisions": {
+        "d1": {
+          "decision": "Una base de datos por servicio, cada una con el motor que le conviene (MongoDB, SQL Server, PostgreSQL con Marten).",
+          "tradeOff": "Cada servicio es dueño de sus datos y los evoluciona de forma independiente, pero las vistas entre servicios deben componerse por red (servicio de Reportes)."
+        },
+        "d2": {
+          "decision": "Un único punto de entrada: un API Gateway con Ocelot que valida el JWT y enruta hacia los servicios.",
+          "tradeOff": "Las políticas de seguridad y enrutamiento viven en un solo lugar, a cambio de un salto adicional y un componente que debe mantenerse altamente disponible."
+        },
+        "d3": {
+          "decision": "Descubrimiento de servicios con Eureka y Spring Cloud Config, con rutas y configuración en un repositorio Git aparte.",
+          "tradeOff": "La configuración cambia sin reconstruir imágenes, pero cada servicio depende del Config Server al iniciar (fail fast)."
+        },
+        "d4": {
+          "decision": "Eventos asíncronos sobre RabbitMQ cuando cambian las pólizas.",
+          "tradeOff": "Productores y consumidores quedan desacoplados y escalan por separado, aceptando consistencia eventual entre ellos."
+        },
+        "d5": {
+          "decision": "Observabilidad desde el primer día: ELK para logs, APM Server para métricas y Jaeger para trazas distribuidas.",
+          "tradeOff": "Una solicitud se puede seguir entre servicios, al precio de una infraestructura más pesada."
+        }
+      }
+    },
+    "employeeAttendanceControl": {
+      "title": "EmployeeAttendanceControl — microservicios de asistencia",
+      "context": "Un sistema para gestionar empleados, sus cuentas de usuario y un historial de asistencias auditable. Cada responsabilidad tiene patrones de acceso y necesidades de consistencia distintas, por eso cada servicio es dueño de sus datos y colaboran mediante eventos.",
+      "nodes": {
+        "client": "Cliente HTTP",
+        "gateway": "API Gateway",
+        "users": "Servicio de Usuarios",
+        "employees": "Servicio de Empleados",
+        "attendances": "Servicio de Asistencias",
+        "rabbit": "Broker de mensajes",
+        "cassandra": "Almacén de usuarios y roles",
+        "sql": "Almacén de empleados y estado actual",
+        "mongo": "Almacén del historial de asistencias"
+      },
+      "interactions": {
+        "i1": "envía cada solicitud con un JWT",
+        "i2": "autenticación y gestión de usuarios (solo admin)",
+        "i3": "gestión de empleados y actualización de asistencias",
+        "i4": "consultas del historial de asistencias",
+        "i5": "publica EmployeeCreateEvent y AttendanceStateChangedEvent",
+        "i6": "crea la cuenta de usuario de cada nuevo empleado",
+        "i7": "agrega cada cambio de asistencia al historial",
+        "i8": "consulta el historial antes de actualizar el estado actual"
+      },
+      "decisions": {
+        "d1": {
+          "decision": "El gateway valida el JWT y el rol de administrador, y cada servicio vuelve a validar el token.",
+          "tradeOff": "Defensa en profundidad: ningún servicio queda expuesto sin controles, a costa de duplicar la validación."
+        },
+        "d2": {
+          "decision": "La creación de empleados y los cambios de asistencia se propagan como eventos en colas durables de RabbitMQ.",
+          "tradeOff": "Los servicios quedan débilmente acoplados y resisten caídas temporales, aceptando consistencia eventual."
+        },
+        "d3": {
+          "decision": "Almacenamiento elegido por patrón de acceso: Cassandra para usuarios, SQL Server con Dapper para el estado actual y MongoDB para un historial de solo inserción.",
+          "tradeOff": "Cada almacén se ajusta a su carga, pero hay tres motores que operar y respaldar."
+        },
+        "d4": {
+          "decision": "Capas de Clean Architecture con CQRS (MediatR) dentro de cada servicio.",
+          "tradeOff": "Las reglas de negocio quedan aisladas y son fáciles de probar, a costa de más archivos y ceremonia."
+        },
+        "d5": {
+          "decision": "Gestión centralizada de paquetes y un test que mantiene sincronizados los dos catálogos de rutas del gateway.",
+          "tradeOff": "Versiones y rutas nunca se desalinean, a costa de un flujo más estricto para cada cambio."
+        }
+      }
+    },
+    "eCommerceMajestic": {
+      "title": "E-Commerce Majestic — Go + Angular en AWS",
+      "context": "Una tienda en línea con tres roles (administrador, vendedor y comprador), catálogo, carrito de compras y un chatbot con IA. La prioridad era entregar un producto completo rápido y desplegarlo en la nube con contenedores, manteniendo un diseño simple de operar.",
+      "nodes": {
+        "spa": "Aplicación web Angular",
+        "alb": "Balanceadores de carga",
+        "api": "API REST en Go",
+        "mysql": "Almacén transaccional",
+        "mongo": "Almacén del historial del chat",
+        "ecs": "Plataforma de contenedores",
+        "openai": "Proveedor de LLM"
+      },
+      "interactions": {
+        "i1": "llama a la API con un JWT",
+        "i2": "reenvía el tráfico a los contenedores de la API",
+        "i3": "usuarios, roles, categorías, productos y carritos",
+        "i4": "guarda el historial de conversaciones del chatbot",
+        "i5": "ejecuta y escala los contenedores de frontend y backend",
+        "i6": "envía los prompts del chatbot"
+      },
+      "decisions": {
+        "d1": {
+          "decision": "Una API REST modular en Go (gorilla/mux, GORM) en lugar de microservicios.",
+          "tradeOff": "Simple de construir, probar y desplegar, pero todo el backend escala como una sola unidad."
+        },
+        "d2": {
+          "decision": "MySQL para los datos transaccionales y MongoDB para el historial del chat.",
+          "tradeOff": "Cada tipo de dato usa el modelo que le conviene, con dos almacenes que operar."
+        },
+        "d3": {
+          "decision": "Middleware JWT por roles declarado en cada ruta (administrador, vendedor, comprador).",
+          "tradeOff": "Las reglas de acceso son explícitas y fáciles de auditar, a costa de algo de repetición."
+        },
+        "d4": {
+          "decision": "Contenedores en AWS: imágenes en ECR, servicios en ECS detrás de un Application Load Balancer por capa y MySQL en RDS.",
+          "tradeOff": "Escalamiento y disponibilidad administrados, con más configuración y costo de nube que gestionar."
+        },
+        "d5": {
+          "decision": "El chatbot llama al proveedor de LLM directamente desde la aplicación web.",
+          "tradeOff": "La forma más rápida de prototipar, pero expone la API key; el siguiente paso es enrutar esas llamadas a través del backend."
+        }
+      }
+    }
+  },
+  "education": {
+    "msc": {
+      "degree": "Máster of Science en Computer Software Engineering"
+    },
+    "dbSpecialization": {
+      "degree": "Especialista en Desarrollo de Bases de Datos"
+    },
+    "systemsEngineering": {
+      "degree": "Ingeniero de Sistemas",
+      "project": "Sistema de gestión y control de información del Centro de Psicología Clínica de la universidad."
+    },
+    "philosophy": {
+      "degree": "Filosofía"
+    }
+  },
+  "certifications": {
+    "az900": "Microsoft Azure Fundamentals (AZ-900)",
+    "architecture": "Curso Profesional de Arquitectura de Software · Fundamentos de Arquitectura de Software",
+    "scrum": "Scrum Foundation",
+    "az104": "Azure Administrator (AZ-104)",
+    "az305": "Azure Solutions Architect Expert (AZ-305)"
+  },
+  "languages": {
+    "spanish": {
+      "name": "Español",
+      "level": "Nativo"
+    },
+    "english": {
+      "name": "Inglés",
+      "level": "Intermedio-alto (B2): lectura, escritura y comunicación en entornos profesionales"
+    }
+  }
+}

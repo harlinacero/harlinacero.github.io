@@ -1,0 +1,50 @@
+[
+  {
+    "id": "microservicesDemo",
+    "name": "Microservices.Demo",
+    "repo": "https://github.com/harlinacero/Microservices.Demo",
+    "companions": [],
+    "demoUrl": null,
+    "tags": [".NET 6", "Java 17", "Ocelot", "Eureka", "RabbitMQ", "ELK", "Angular", "Docker"],
+    "caseStudyId": "microservicesDemo"
+  },
+  {
+    "id": "employeeAttendanceControl",
+    "name": "EmployeeAttendanceControl",
+    "repo": "https://github.com/harlinacero/EmployeeAttendanceControl",
+    "companions": [],
+    "demoUrl": null,
+    "tags": [".NET 10", "Ocelot", "RabbitMQ", "MediatR", "Cassandra", "SQL Server", "MongoDB", "Docker"],
+    "caseStudyId": "employeeAttendanceControl"
+  },
+  {
+    "id": "eCommerceMajestic",
+    "name": "E-Commerce Majestic",
+    "repo": "https://github.com/harlinacero/e-commerce-majestic-full",
+    "companions": [],
+    "demoUrl": null,
+    "tags": ["Go", "Angular 16", "MySQL", "MongoDB", "JWT", "AWS ECS", "Docker"],
+    "caseStudyId": "eCommerceMajestic"
+  },
+  {
+    "id": "easyReportsIA",
+    "name": "EasyReportsIA",
+    "repo": "https://github.com/harlinacero/EasyReportsIA",
+    "mainLabelKey": "projects.easyReportsIA.repoLabels.main",
+    "companions": [
+      { "repo": "https://github.com/harlinacero/easyreports", "labelKey": "projects.easyReportsIA.repoLabels.easyreports" }
+    ],
+    "demoUrl": null,
+    "tags": [".NET", "OpenAI", "SQL Server", "React", "DevExtreme"],
+    "caseStudyId": null
+  },
+  {
+    "id": "medicalcenter",
+    "name": "Medical Center",
+    "repo": "https://github.com/harlinacero/medicalcenter",
+    "companions": [],
+    "demoUrl": null,
+    "tags": [".NET 8", "React", "SQL Server", "N-layer"],
+    "caseStudyId": null
+  }
+]

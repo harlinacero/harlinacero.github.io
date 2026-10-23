@@ -1,0 +1,17 @@
+# Pull requests: run the quality check and report it; never publish (AC-28).
+name: Pull request
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    uses: ./.github/workflows/quality.yml

@@ -1,0 +1,67 @@
+/* Decorative motion. Everything here runs only when the visitor has not asked for reduced
+   motion (BR-10, AC-06); without this file the page is complete and static. */
+@property --ring-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+
+  .hero__photo-ring { animation: ring-spin 9s linear infinite; }
+
+  .hero__caret { animation: caret-blink 1s steps(1) infinite; }
+
+  .backdrop__glow--cyan { animation: drift 18s ease-in-out infinite alternate; }
+  .backdrop__glow--violet { animation: drift 22s ease-in-out infinite alternate-reverse; }
+
+  .loader span { animation: pulse 1s ease-in-out infinite; }
+  .loader span:nth-child(2) { animation-delay: 150ms; }
+  .loader span:nth-child(3) { animation-delay: 300ms; }
+
+  /* Scroll reveal: only armed by effects.js when IntersectionObserver is available. */
+  .reveal-ready .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity var(--duration) var(--ease-out), transform var(--duration) var(--ease-out);
+  }
+
+  .reveal-ready .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Data flowing between diagram layers. */
+  .diagram__layer + .diagram__layer::before {
+    background: repeating-linear-gradient(to bottom, var(--color-cyan) 0 4px, transparent 4px 8px);
+    animation: flow-down 900ms linear infinite;
+  }
+
+  .tab[aria-selected='true'] {
+    background-size: 200% 100%;
+    animation: gradient-shift 6s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes ring-spin { to { --ring-angle: 360deg; } }
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+@keyframes drift {
+  to { transform: translate(6vmax, 4vmax) scale(1.1); }
+}
+
+@keyframes pulse {
+  50% { transform: scale(1.5); opacity: 1; }
+}
+
+@keyframes flow-down {
+  to { background-position: 0 8px; }
+}
+
+@keyframes gradient-shift {
+  to { background-position: 100% 0; }
+}
