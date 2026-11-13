@@ -122,6 +122,9 @@
     "certifications": {
       "inProgress": "En preparación"
     },
+    "projects": {
+      "inProgress": "En construcción"
+    },
     "footer": {
       "builtWith": "Hecho con HTML, CSS y JavaScript · Probado con Vitest y Playwright · Desplegado con GitHub Actions"
     }
@@ -257,7 +260,7 @@
   "skills": {
     "architecture": {
       "title": "Arquitectura",
-      "items": ["Microservicios", "Arquitectura orientada a eventos", "Sistemas distribuidos", "Clean Architecture", "CQRS", "Patrones de diseño", "REST", "gRPC", "API Gateway"]
+      "items": ["Microservicios", "Arquitectura orientada a eventos", "Sistemas distribuidos", "Clean Architecture", "CQRS", "Patrones de diseño", "REST", "gRPC", "API Gateway", "Multitenencia", "IA generativa (RAG, agentes)"]
     },
     "leadership": {
       "title": "Liderazgo",
@@ -273,7 +276,7 @@
     },
     "languages": {
       "title": "Lenguajes y frameworks",
-      "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "TypeScript", "Angular", "React", "Java", "Spring Boot", "Go", "Python"]
+      "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "TypeScript", "Angular", "React", "Java", "Spring Boot", "Go", "Python", "FastAPI"]
     },
     "observability": {
       "title": "Observabilidad y BI",
@@ -281,7 +284,7 @@
     },
     "quality": {
       "title": "Pruebas y seguridad",
-      "items": ["xUnit", "JUnit", "Jasmine", "Pruebas de integración", "JMeter", "JWT", "OAuth2", "Manejo de secretos"]
+      "items": ["xUnit", "JUnit", "Jasmine", "Pruebas de integración", "JMeter", "JWT", "OAuth2", "OpenID Connect", "Manejo de secretos"]
     }
   },
   "projects": {
@@ -290,8 +293,16 @@
       "demonstrates": "Microservicios · API Gateway · Descubrimiento de servicios · Configuración externalizada · Observabilidad"
     },
     "employeeAttendanceControl": {
-      "description": "Microservicios en .NET 10 para empleados, usuarios e historial de asistencias: gateway con JWT por roles, eventos con RabbitMQ y almacenamiento elegido por servicio (Cassandra, SQL Server, MongoDB), construido spec-first con Clean Architecture y CQRS.",
-      "demonstrates": "Diseño orientado a eventos · Defensa en profundidad · Persistencia políglota · Desarrollo guiado por especificaciones"
+      "description": "Microservicios en .NET 10 para empleados, usuarios e historial de asistencias: un gateway que valida tokens RS256 emitidos solo por el servicio de Usuarios (con refresh tokens de un solo uso), eventos con RabbitMQ, almacenamiento elegido por servicio (Cassandra, SQL Server, MongoDB) y un asistente de IA (Claude) que responde preguntas sobre asistencias con los permisos de quien pregunta. Construido spec-first con Clean Architecture, CQRS y una suite de regresión end-to-end.",
+      "demonstrates": "Diseño orientado a eventos · Defensa en profundidad · Persistencia políglota · Agente de IA con herramientas · Desarrollo guiado por especificaciones"
+    },
+    "identityPlatform": {
+      "description": "Plataforma de identidad multi-tenant con OAuth2/OpenID Connect (Authorization Code + PKCE) construida como microservicios políglotas en .NET, Java, Go, Python y Node.js, con frontends en React y Angular: aprovisionamiento SCIM, federación LDAP, MFA basado en riesgo y auditoría de seguridad casi en tiempo real. Corre en local con Docker como único requisito y tiene un camino con Terraform hacia Azure y AWS. La base de inicio de sesión consciente del tenant ya está lista; las demás fases están en curso.",
+      "demonstrates": "Multitenencia · OAuth2/OIDC · Eventos con Kafka y comandos con RabbitMQ · Patrones de resiliencia · Registros de decisiones de arquitectura"
+    },
+    "ragDocsApi": {
+      "description": "API de generación aumentada por recuperación (RAG): subes documentos, haces preguntas y recibes respuestas basadas en esos documentos, con las fuentes que respaldan cada respuesta. Los embedders y generadores están detrás de interfaces pequeñas (offline por defecto, OpenAI por configuración), y una salvaguarda de \"sin contexto, no hay respuesta\" prefiere negarse antes que adivinar.",
+      "demonstrates": "RAG · Salvaguardas de IA responsable · Diseño independiente del proveedor · Servicio FastAPI con pruebas"
     },
     "eCommerceMajestic": {
       "description": "E-commerce con roles de administrador, vendedor y comprador, carrito de compras y un chatbot con IA: API REST en Go, SPA en Angular 16, MySQL y MongoDB, desplegado con contenedores en AWS detrás de balanceadores de carga.",
@@ -366,7 +377,7 @@
     },
     "employeeAttendanceControl": {
       "title": "EmployeeAttendanceControl — microservicios de asistencia",
-      "context": "Un sistema para gestionar empleados, sus cuentas de usuario y un historial de asistencias auditable. Cada responsabilidad tiene patrones de acceso y necesidades de consistencia distintas, por eso cada servicio es dueño de sus datos y colaboran mediante eventos.",
+      "context": "Un sistema para gestionar empleados, sus cuentas de usuario y un historial de asistencias auditable. Cada responsabilidad tiene patrones de acceso y necesidades de consistencia distintas, por eso cada servicio es dueño de sus datos y colaboran mediante eventos. Un asistente de IA responde preguntas sobre asistencias en lenguaje natural, actuando solo con los permisos de quien pregunta.",
       "nodes": {
         "client": "Cliente HTTP",
         "gateway": "API Gateway",
@@ -376,22 +387,25 @@
         "rabbit": "Broker de mensajes",
         "cassandra": "Almacén de usuarios y roles",
         "sql": "Almacén de empleados y estado actual",
-        "mongo": "Almacén del historial de asistencias"
+        "mongo": "Almacén del historial de asistencias",
+        "assistant": "Asistente de IA"
       },
       "interactions": {
         "i1": "envía cada solicitud con un JWT",
-        "i2": "autenticación y gestión de usuarios (solo admin)",
+        "i2": "inicio de sesión, renovación de tokens y gestión de usuarios (solo admin)",
         "i3": "gestión de empleados y actualización de asistencias",
         "i4": "consultas del historial de asistencias",
         "i5": "publica EmployeeCreateEvent y AttendanceStateChangedEvent",
         "i6": "crea la cuenta de usuario de cada nuevo empleado",
         "i7": "agrega cada cambio de asistencia al historial",
-        "i8": "consulta el historial antes de actualizar el estado actual"
+        "i8": "consulta el historial antes de actualizar el estado actual",
+        "i9": "preguntas sobre asistencias en lenguaje natural",
+        "i10": "consulta empleados y asistencias con el token de quien pregunta (solo lectura)"
       },
       "decisions": {
         "d1": {
-          "decision": "El gateway valida el JWT y el rol de administrador, y cada servicio vuelve a validar el token.",
-          "tradeOff": "Defensa en profundidad: ningún servicio queda expuesto sin controles, a costa de duplicar la validación."
+          "decision": "Solo el servicio de Usuarios emite tokens, firmados con RS256; el gateway valida el JWT y el rol de administrador, y cada servicio lo vuelve a validar con la clave pública que aquel publica (JWKS).",
+          "tradeOff": "Defensa en profundidad sin secretos compartidos: ningún otro servicio puede crear un token, a costa de duplicar la validación y distribuir la clave."
         },
         "d2": {
           "decision": "La creación de empleados y los cambios de asistencia se propagan como eventos en colas durables de RabbitMQ.",

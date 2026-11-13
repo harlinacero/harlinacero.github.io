@@ -120,7 +120,10 @@
 }
 
 .badge {
+  display: inline-block;
   margin-left: var(--space-2);
+  white-space: nowrap;
+  vertical-align: middle;
   padding: 0.1rem 0.55rem;
   border-radius: var(--radius-pill);
   background: rgb(251 191 36 / 0.14);
