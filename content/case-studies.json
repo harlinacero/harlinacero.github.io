@@ -90,6 +90,119 @@
     "qualities": ["security", "maintainability", "testability", "consistency"]
   },
   {
+    "id": "identityPlatform",
+    "projectId": "identityPlatform",
+    "repo": "https://github.com/harlinacero/identity-platform",
+    "layers": [
+      {
+        "id": "client",
+        "nodes": [
+          { "id": "web", "tech": "React · Vite" },
+          { "id": "console", "tech": "Angular" },
+          { "id": "apps", "tech": "OIDC · Authorization Code + PKCE · SCIM" }
+        ]
+      },
+      {
+        "id": "edge",
+        "nodes": [
+          { "id": "gateway", "tech": ".NET 10 · YARP" }
+        ]
+      },
+      {
+        "id": "services",
+        "nodes": [
+          { "id": "identity", "tech": ".NET 10 · OpenIddict · EF Core" },
+          { "id": "tenants", "tech": ".NET 10 · EF Core · SCIM 2.0" },
+          { "id": "ldap", "tech": "Java 21 · Spring Boot · Spring LDAP" },
+          { "id": "risk", "tech": "Python · FastAPI" },
+          { "id": "audit", "tech": "Go" },
+          { "id": "notifications", "tech": "Node.js · TypeScript" }
+        ]
+      },
+      {
+        "id": "messaging",
+        "nodes": [
+          { "id": "kafka", "tech": "Kafka · KRaft" },
+          { "id": "rabbit", "tech": "RabbitMQ · DLQ" }
+        ]
+      },
+      {
+        "id": "data",
+        "nodes": [
+          { "id": "identityDb", "tech": "PostgreSQL · Row-Level Security", "ownedBy": "identity" },
+          { "id": "tenantsDb", "tech": "PostgreSQL · Row-Level Security", "ownedBy": "tenants" },
+          { "id": "redis", "tech": "Redis" },
+          { "id": "search", "tech": "OpenSearch", "ownedBy": "audit" }
+        ]
+      },
+      {
+        "id": "platform",
+        "nodes": [
+          { "id": "runtime", "tech": "Kubernetes · Helm · HPA · KEDA · Terraform" }
+        ]
+      }
+    ],
+    "interactions": [
+      { "id": "i1", "from": ["web", "console", "apps"], "to": ["gateway"], "kind": "sync" },
+      { "id": "i2", "from": ["gateway"], "to": ["identity", "tenants", "audit"], "kind": "sync" },
+      { "id": "i3", "from": ["identity"], "to": ["tenants"], "kind": "sync" },
+      { "id": "i4", "from": ["identity"], "to": ["ldap"], "kind": "sync" },
+      { "id": "i5", "from": ["identity"], "to": ["risk"], "kind": "sync" },
+      { "id": "i6", "from": ["gateway", "identity"], "to": ["redis"], "kind": "sync" },
+      { "id": "i7", "from": ["identity", "tenants"], "to": ["kafka"], "kind": "async" },
+      { "id": "i8", "from": ["kafka"], "to": ["audit", "risk"], "kind": "async" },
+      { "id": "i9", "from": ["identity", "audit"], "to": ["rabbit"], "kind": "async" },
+      { "id": "i10", "from": ["rabbit"], "to": ["notifications"], "kind": "async" },
+      { "id": "i11", "from": ["runtime"], "to": ["gateway", "identity", "tenants", "ldap", "risk", "audit", "notifications"], "kind": "config" }
+    ],
+    "decisions": ["d1", "d2", "d3", "d4", "d5"],
+    "qualities": ["security", "resilience", "scalability", "auditability"]
+  },
+  {
+    "id": "ragDocsApi",
+    "projectId": "ragDocsApi",
+    "repo": "https://github.com/harlinacero/rag-docs-api",
+    "layers": [
+      {
+        "id": "client",
+        "nodes": [
+          { "id": "client", "tech": "REST · OpenAPI (Swagger)" }
+        ]
+      },
+      {
+        "id": "services",
+        "nodes": [
+          { "id": "api", "tech": "FastAPI · Pydantic" },
+          { "id": "pipeline", "tech": "Python" },
+          { "id": "chunker", "tech": "Python" }
+        ]
+      },
+      {
+        "id": "data",
+        "nodes": [
+          { "id": "store", "tech": "NumPy · cosine similarity", "ownedBy": "pipeline" }
+        ]
+      },
+      {
+        "id": "platform",
+        "nodes": [
+          { "id": "embedder", "tech": "Hashing (md5) · OpenAI" },
+          { "id": "generator", "tech": "Offline · OpenAI" }
+        ]
+      }
+    ],
+    "interactions": [
+      { "id": "i1", "from": ["client"], "to": ["api"], "kind": "sync" },
+      { "id": "i2", "from": ["api"], "to": ["pipeline"], "kind": "sync" },
+      { "id": "i3", "from": ["pipeline"], "to": ["chunker"], "kind": "sync" },
+      { "id": "i4", "from": ["pipeline"], "to": ["embedder"], "kind": "sync" },
+      { "id": "i5", "from": ["pipeline"], "to": ["store"], "kind": "sync" },
+      { "id": "i6", "from": ["pipeline"], "to": ["generator"], "kind": "sync" }
+    ],
+    "decisions": ["d1", "d2", "d3", "d4", "d5"],
+    "qualities": ["modifiability", "testability", "transparency"]
+  },
+  {
     "id": "eCommerceMajestic",
     "projectId": "eCommerceMajestic",
     "repo": "https://github.com/harlinacero/e-commerce-majestic-full",

@@ -111,7 +111,10 @@
       "maintainability": "Mantenibilidad",
       "testability": "Testeabilidad",
       "consistency": "Consistencia",
-      "deployability": "Desplegabilidad"
+      "deployability": "Desplegabilidad",
+      "resilience": "Resiliencia",
+      "auditability": "Auditabilidad",
+      "transparency": "Transparencia"
     },
     "experience": {
       "progression": "Progresión de carrera"
@@ -422,6 +425,107 @@
         "d5": {
           "decision": "Gestión centralizada de paquetes y un test que mantiene sincronizados los dos catálogos de rutas del gateway.",
           "tradeOff": "Versiones y rutas nunca se desalinean, a costa de un flujo más estricto para cada cambio."
+        }
+      }
+    },
+    "identityPlatform": {
+      "title": "Identity Platform — identidad multi-tenant (en construcción)",
+      "context": "Un proveedor OAuth2/OpenID Connect compartido por muchas organizaciones: cada tenant tiene sus propios usuarios, roles, directorio y políticas de seguridad, y sus datos nunca deben mezclarse. El diagrama muestra la arquitectura objetivo; la base de inicio de sesión consciente del tenant (Identity + PostgreSQL) ya está construida y los demás servicios llegan fase por fase.",
+      "nodes": {
+        "web": "Inicio de sesión y autoservicio",
+        "console": "Consola de administración",
+        "apps": "Aplicaciones cliente y RR. HH.",
+        "gateway": "API Gateway",
+        "identity": "Servicio de Identidad",
+        "tenants": "Servicio de Tenants y Usuarios",
+        "ldap": "Conector LDAP",
+        "risk": "Servicio de Riesgo",
+        "audit": "Servicio de Auditoría",
+        "notifications": "Servicio de Notificaciones",
+        "kafka": "Flujo de eventos",
+        "rabbit": "Broker de comandos",
+        "identityDb": "Almacén de clientes, tokens y outbox",
+        "tenantsDb": "Almacén de tenants, usuarios y roles",
+        "redis": "Sesiones, bloqueos y contadores de rate limiting",
+        "search": "Almacén de auditoría de seguridad",
+        "runtime": "Plataforma de contenedores"
+      },
+      "interactions": {
+        "i1": "inicio de sesión (OIDC), administración y aprovisionamiento SCIM por HTTPS",
+        "i2": "enruta cada solicitud tras validar el JWT y quitar cualquier encabezado de tenant",
+        "i3": "valida credenciales locales y roles con un token de identidad de servicio",
+        "i4": "inicio de sesión corporativo con circuit breaker y respaldo local",
+        "i5": "pide un puntaje de riesgo por inicio de sesión con un timeout corto",
+        "i6": "contadores de rate limiting, sesiones y bloqueo progresivo",
+        "i7": "publican eventos security.* y user.* mediante un outbox transaccional",
+        "i8": "consumidores idempotentes indexan la auditoría y construyen el historial de accesos",
+        "i9": "envían los comandos SendMfaCode y SendSecurityAlert",
+        "i10": "entrega códigos MFA y alertas con reintentos y cola de mensajes muertos",
+        "i11": "ejecuta y escala cada servicio, en local (kind) y en Azure o AWS"
+      },
+      "decisions": {
+        "d1": {
+          "decision": "Bases de datos compartidas con un tenant_id aplicado dos veces, con filtros de EF Core y Row-Level Security de PostgreSQL; el tenant sale solo del cliente OIDC o del claim del token, nunca de la solicitud.",
+          "tradeOff": "Muchos tenants a bajo costo con una segunda barrera ante un filtro olvidado, a costa de un manejo estricto de conexiones y sin escalar los datos por tenant."
+        },
+        "d2": {
+          "decision": "Kafka para hechos (security.*, user.*) y RabbitMQ para comandos (notifications.*), cada uno detrás de una abstracción que se mapea a servicios de Azure o AWS.",
+          "tradeOff": "Historial de auditoría reproducible más reintentos y DLQ por mensaje, a costa de operar dos brokers."
+        },
+        "d3": {
+          "decision": "Todo evento sale por un outbox transaccional y todo consumidor es idempotente.",
+          "tradeOff": "No hay eventos perdidos ni fantasma cuando la base de datos y el broker discrepan, a costa de un proceso relay y entrega al menos una vez."
+        },
+        "d4": {
+          "decision": "Timeouts y reintentos con backoff y jitter en cada llamada interna, y un circuit breaker con respaldo local frente a LDAP; si Riesgo no responde, el inicio de sesión se trata como riesgo medio y exige MFA.",
+          "tradeOff": "El inicio de sesión sigue funcionando, degradado de forma segura, cuando falla una dependencia, a costa de más caminos que diseñar y probar."
+        },
+        "d5": {
+          "decision": "Servicios políglotas, cada uno en el ecosistema que mejor le encaja (OpenIddict, Spring LDAP, Python para riesgo, Go para auditoría), con Docker como único requisito en la máquina.",
+          "tradeOff": "Cada problema usa la herramienta adecuada y cualquiera puede correr el sistema completo, a costa de más toolchains que construir, probar y asegurar."
+        }
+      }
+    },
+    "ragDocsApi": {
+      "title": "Ask My Docs — API RAG (en construcción)",
+      "context": "Un servicio pequeño de generación aumentada por recuperación: responde preguntas solo con los documentos que recibió y muestra las fuentes, para que una persona pueda verificar cada respuesta. Está hecho para leerse en una tarde, conservando las piezas de un sistema RAG en producción.",
+      "nodes": {
+        "client": "Cliente de la API",
+        "api": "API HTTP",
+        "pipeline": "Pipeline RAG",
+        "chunker": "Fragmentador",
+        "store": "Almacén vectorial",
+        "embedder": "Generador de embeddings",
+        "generator": "Generador de respuestas"
+      },
+      "interactions": {
+        "i1": "POST /documents y POST /ask con entradas validadas y de tamaño limitado",
+        "i2": "inyectado con Depends de FastAPI, para que las pruebas lo reemplacen",
+        "i3": "divide cada documento en fragmentos superpuestos",
+        "i4": "convierte fragmentos y preguntas en vectores normalizados",
+        "i5": "reemplaza de forma idempotente los fragmentos de un documento y devuelve los más similares",
+        "i6": "responde solo con fragmentos sobre el umbral de similitud; sin ninguno, responde \"no lo sé\""
+      },
+      "decisions": {
+        "d1": {
+          "decision": "El generador de embeddings y el de respuestas son interfaces pequeñas con una implementación offline y otra con OpenAI, elegidas por configuración.",
+          "tradeOff": "Cambiar de proveedor es un ajuste y las pruebas nunca necesitan red, a costa de ocultar funciones propias de cada proveedor detrás de una interfaz común."
+        },
+        "d2": {
+          "decision": "Sin contexto no hay respuesta: si ningún fragmento alcanza el umbral de similitud, el servicio dice \"no lo sé\" y nunca llama al generador.",
+          "tradeOff": "Menos alucinaciones, a costa de rechazar algunas preguntas que sí tienen respuesta si el umbral es muy estricto."
+        },
+        "d3": {
+          "decision": "Cada respuesta devuelve sus fuentes y un indicador grounded, y el prompt trata el texto de los documentos como datos, no como instrucciones.",
+          "tradeOff": "Las respuestas se pueden verificar y hay una defensa básica contra prompt injection, aunque no completa."
+        },
+        "d4": {
+          "decision": "Un almacén en memoria con NumPy y vectores normalizados, de modo que la similitud coseno es un solo producto de matrices, con guardado y carga en disco.",
+          "tradeOff": "Sin infraestructura y fácil de leer, pero de un solo proceso; una base de datos vectorial es el camino para escalar."
+        },
+        "d5": {
+          "decision": "Un generador de embeddings offline y determinista (hash md5 en lugar del hash() de Python) por defecto.",
+          "tradeOff": "Pruebas y CI reproducibles sin API key, a costa de comparar palabras y no significado."
         }
       }
     },
