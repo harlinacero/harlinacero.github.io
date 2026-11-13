@@ -111,7 +111,10 @@
       "maintainability": "Maintainability",
       "testability": "Testability",
       "consistency": "Consistency",
-      "deployability": "Deployability"
+      "deployability": "Deployability",
+      "resilience": "Resilience",
+      "auditability": "Auditability",
+      "transparency": "Transparency"
     },
     "experience": {
       "progression": "Career progression"
@@ -422,6 +425,107 @@
         "d5": {
           "decision": "Central package management and a test that keeps both gateway route catalogs in sync.",
           "tradeOff": "Versions and routes never drift, at the cost of a stricter workflow for every change."
+        }
+      }
+    },
+    "identityPlatform": {
+      "title": "Identity Platform — multi-tenant identity (in progress)",
+      "context": "An OAuth2/OpenID Connect provider shared by many organizations: each tenant has its own users, roles, directory and security policies, and their data must never cross. The diagram shows the target architecture; the tenant-aware sign-in foundation (Identity + PostgreSQL) is built, and the remaining services arrive phase by phase.",
+      "nodes": {
+        "web": "Sign-in & self-service",
+        "console": "Admin console",
+        "apps": "Client applications & HR",
+        "gateway": "API Gateway",
+        "identity": "Identity service",
+        "tenants": "Tenants & Users service",
+        "ldap": "LDAP connector",
+        "risk": "Risk service",
+        "audit": "Audit service",
+        "notifications": "Notifications service",
+        "kafka": "Event stream",
+        "rabbit": "Command broker",
+        "identityDb": "Clients, tokens & outbox store",
+        "tenantsDb": "Tenants, users & roles store",
+        "redis": "Sessions, lockouts & rate-limit counters",
+        "search": "Security audit store",
+        "runtime": "Container platform"
+      },
+      "interactions": {
+        "i1": "sign-in (OIDC), administration and SCIM provisioning over HTTPS",
+        "i2": "routes each request after checking the JWT and stripping any tenant header",
+        "i3": "checks local credentials and roles with a service identity token",
+        "i4": "corporate sign-in with a circuit breaker and local fallback",
+        "i5": "asks for a per-login risk score with a short timeout",
+        "i6": "rate-limit counters, sessions and progressive lockout",
+        "i7": "publish security.* and user.* events through a transactional outbox",
+        "i8": "idempotent consumers index the audit trail and build login history",
+        "i9": "send SendMfaCode and SendSecurityAlert commands",
+        "i10": "delivers MFA codes and alerts with retries and a dead-letter queue",
+        "i11": "runs and autoscales every service, locally (kind) and on Azure or AWS"
+      },
+      "decisions": {
+        "d1": {
+          "decision": "Shared databases with a tenant_id enforced twice, by EF Core query filters and PostgreSQL Row-Level Security; the tenant comes only from the OIDC client or the token claim, never from the request.",
+          "tradeOff": "Many tenants at low cost with a second wall against a forgotten filter, at the cost of strict connection handling and no per-tenant scaling of data."
+        },
+        "d2": {
+          "decision": "Kafka for facts (security.*, user.*) and RabbitMQ for commands (notifications.*), each behind an abstraction that maps to Azure or AWS services.",
+          "tradeOff": "Replayable audit history plus per-message retries and DLQs, at the cost of operating two brokers."
+        },
+        "d3": {
+          "decision": "Every event leaves through a transactional outbox, and every consumer is idempotent.",
+          "tradeOff": "No lost or phantom events when the database and the broker disagree, at the cost of a relay process and at-least-once delivery."
+        },
+        "d4": {
+          "decision": "Timeouts, retries with backoff and jitter on every internal call, and a circuit breaker with local fallback in front of LDAP; if Risk does not answer, the sign-in is treated as medium risk and requires MFA.",
+          "tradeOff": "Sign-in keeps working, safely degraded, when a dependency fails, at the cost of more paths to design and test."
+        },
+        "d5": {
+          "decision": "Polyglot services, each in the ecosystem that fits it best (OpenIddict, Spring LDAP, Python for risk, Go for audit), with Docker as the only host requirement.",
+          "tradeOff": "Each problem gets the right tool and anyone can run the whole system, at the cost of more toolchains to build, test and secure."
+        }
+      }
+    },
+    "ragDocsApi": {
+      "title": "Ask My Docs — RAG API (in progress)",
+      "context": "A small retrieval-augmented generation service: it answers questions only from the documents it was given and shows the sources, so a person can check every answer. It is built to be read in an afternoon while keeping the building blocks of a production RAG system.",
+      "nodes": {
+        "client": "API client",
+        "api": "HTTP API",
+        "pipeline": "RAG pipeline",
+        "chunker": "Chunker",
+        "store": "Vector store",
+        "embedder": "Embedder",
+        "generator": "Answer generator"
+      },
+      "interactions": {
+        "i1": "POST /documents and POST /ask with validated, size-limited input",
+        "i2": "injected with FastAPI Depends, so tests can replace it",
+        "i3": "splits each document into overlapping chunks",
+        "i4": "turns chunks and questions into normalized vectors",
+        "i5": "replaces a document's chunks idempotently and returns the most similar ones",
+        "i6": "answers only from chunks above the similarity threshold; with none, it replies \"I don't know\""
+      },
+      "decisions": {
+        "d1": {
+          "decision": "Embedder and generator are small interfaces with an offline and an OpenAI implementation, chosen by configuration.",
+          "tradeOff": "Changing provider is a setting and tests never need the network, at the cost of hiding provider-specific features behind a common interface."
+        },
+        "d2": {
+          "decision": "No context, no answer: when no chunk reaches the similarity threshold the service says \"I don't know\" and never calls the generator.",
+          "tradeOff": "Fewer hallucinations, at the cost of refusing some answerable questions if the threshold is too strict."
+        },
+        "d3": {
+          "decision": "Every answer returns its sources and a grounded flag, and the prompt treats document text as data, not instructions.",
+          "tradeOff": "Answers can be verified and there is a basic defence against prompt injection, though not a complete one."
+        },
+        "d4": {
+          "decision": "An in-memory NumPy store with normalized vectors, so cosine similarity is a single matrix product, with save and load to disk.",
+          "tradeOff": "No infrastructure and easy to read, but single-process; a vector database is the path to scale."
+        },
+        "d5": {
+          "decision": "A deterministic offline embedder (md5 hashing instead of Python's hash()) as the default.",
+          "tradeOff": "Reproducible tests and CI with no API key, at the cost of matching words rather than meaning."
         }
       }
     },

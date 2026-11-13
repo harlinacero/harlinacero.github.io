@@ -25,7 +25,7 @@
     "demoUrl": null,
     "status": "inProgress",
     "tags": [".NET", "OpenIddict", "YARP", "Spring Boot", "Go", "Python", "Kafka", "RabbitMQ", "PostgreSQL", "Kubernetes", "Terraform"],
-    "caseStudyId": null
+    "caseStudyId": "identityPlatform"
   },
   {
     "id": "ragDocsApi",
@@ -35,7 +35,7 @@
     "demoUrl": null,
     "status": "inProgress",
     "tags": ["Python", "FastAPI", "RAG", "NumPy", "OpenAI", "pytest", "Docker"],
-    "caseStudyId": null
+    "caseStudyId": "ragDocsApi"
   },
   {
     "id": "eCommerceMajestic",

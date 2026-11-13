@@ -93,12 +93,12 @@ describe('language-neutral content data', () => {
     expect([...starts].sort().reverse()).toEqual(starts);
   });
 
-  it('should define three case studies when loading case-studies.json', () => {
+  it('should define five case studies in the projects order when loading case-studies.json', () => {
     // Arrange / Act
     const ids = caseStudies.map((study) => study.id);
 
     // Assert
-    expect(ids).toEqual(['microservicesDemo', 'employeeAttendanceControl', 'eCommerceMajestic']);
+    expect(ids).toEqual(['microservicesDemo', 'employeeAttendanceControl', 'identityPlatform', 'ragDocsApi', 'eCommerceMajestic']);
     caseStudies.forEach((study) => {
       expect(study.decisions.length).toBeGreaterThanOrEqual(3);
       expect(study.decisions.length).toBeLessThanOrEqual(5);

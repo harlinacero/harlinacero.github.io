@@ -33,8 +33,8 @@ describe('renderCaseStudies', () => {
 
     // Assert
     const tabs = [...studies.querySelectorAll('[role="tab"]')];
-    expect(tabs).toHaveLength(3);
-    expect(tabs.map((tab) => tab.getAttribute('aria-selected'))).toEqual(['true', 'false', 'false']);
+    expect(tabs).toHaveLength(5);
+    expect(tabs.map((tab) => tab.getAttribute('aria-selected'))).toEqual(['true', 'false', 'false', 'false', 'false']);
     expect(studies.querySelector('#case-employeeAttendanceControl').hidden).toBe(true);
   });
 
