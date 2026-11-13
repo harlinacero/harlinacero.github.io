@@ -14,8 +14,28 @@
     "repo": "https://github.com/harlinacero/EmployeeAttendanceControl",
     "companions": [],
     "demoUrl": null,
-    "tags": [".NET 10", "Ocelot", "RabbitMQ", "MediatR", "Cassandra", "SQL Server", "MongoDB", "Docker"],
+    "tags": [".NET 10", "Ocelot", "RabbitMQ", "MediatR", "Cassandra", "SQL Server", "MongoDB", "Claude", "Docker"],
     "caseStudyId": "employeeAttendanceControl"
+  },
+  {
+    "id": "identityPlatform",
+    "name": "Identity Platform",
+    "repo": "https://github.com/harlinacero/identity-platform",
+    "companions": [],
+    "demoUrl": null,
+    "status": "inProgress",
+    "tags": [".NET", "OpenIddict", "YARP", "Spring Boot", "Go", "Python", "Kafka", "RabbitMQ", "PostgreSQL", "Kubernetes", "Terraform"],
+    "caseStudyId": null
+  },
+  {
+    "id": "ragDocsApi",
+    "name": "Ask My Docs",
+    "repo": "https://github.com/harlinacero/rag-docs-api",
+    "companions": [],
+    "demoUrl": null,
+    "status": "inProgress",
+    "tags": ["Python", "FastAPI", "RAG", "NumPy", "OpenAI", "pytest", "Docker"],
+    "caseStudyId": null
   },
   {
     "id": "eCommerceMajestic",

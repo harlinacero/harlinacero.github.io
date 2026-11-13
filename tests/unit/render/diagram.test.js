@@ -15,7 +15,7 @@ describe('renderDiagram', () => {
 
     // Assert
     expect(texts(diagram, '.diagram__layer-label')).toEqual(['Clients', 'Edge', 'Services', 'Messaging', 'Data']);
-    expect(diagram.querySelectorAll('.diagram__node')).toHaveLength(9);
+    expect(diagram.querySelectorAll('.diagram__node')).toHaveLength(10);
     expect(diagram.querySelector('[data-node="mongo"] .diagram__node-tech').textContent).toBe('MongoDB');
     expect(diagram.querySelector('.diagram__frame').getAttribute('tabindex')).toBe('0');
   });
@@ -46,7 +46,7 @@ describe('describeDiagram', () => {
     // Assert
     expect(components).toContain('Data: Attendance history store (MongoDB), owned by Attendances service');
     expect(interactions).toContain('Employees service → Message broker: publishes EmployeeCreateEvent and AttendanceStateChangedEvent (asynchronous)');
-    expect(interactions).toHaveLength(8);
+    expect(interactions).toHaveLength(10);
   });
 
   it('should join several sources and targets when an interaction has many', () => {

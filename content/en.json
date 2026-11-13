@@ -122,6 +122,9 @@
     "certifications": {
       "inProgress": "In progress"
     },
+    "projects": {
+      "inProgress": "In progress"
+    },
     "footer": {
       "builtWith": "Built with HTML, CSS and JavaScript · Tested with Vitest and Playwright · Deployed with GitHub Actions"
     }
@@ -257,7 +260,7 @@
   "skills": {
     "architecture": {
       "title": "Architecture",
-      "items": ["Microservices", "Event-driven architecture", "Distributed systems", "Clean Architecture", "CQRS", "Design patterns", "REST", "gRPC", "API Gateway"]
+      "items": ["Microservices", "Event-driven architecture", "Distributed systems", "Clean Architecture", "CQRS", "Design patterns", "REST", "gRPC", "API Gateway", "Multi-tenancy", "Generative AI (RAG, agents)"]
     },
     "leadership": {
       "title": "Leadership",
@@ -273,7 +276,7 @@
     },
     "languages": {
       "title": "Languages & frameworks",
-      "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "TypeScript", "Angular", "React", "Java", "Spring Boot", "Go", "Python"]
+      "items": ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "TypeScript", "Angular", "React", "Java", "Spring Boot", "Go", "Python", "FastAPI"]
     },
     "observability": {
       "title": "Observability & BI",
@@ -281,7 +284,7 @@
     },
     "quality": {
       "title": "Testing & security",
-      "items": ["xUnit", "JUnit", "Jasmine", "Integration testing", "JMeter", "JWT", "OAuth2", "Secrets management"]
+      "items": ["xUnit", "JUnit", "Jasmine", "Integration testing", "JMeter", "JWT", "OAuth2", "OpenID Connect", "Secrets management"]
     }
   },
   "projects": {
@@ -290,8 +293,16 @@
       "demonstrates": "Microservices · API Gateway · Service discovery · Externalized configuration · Observability"
     },
     "employeeAttendanceControl": {
-      "description": ".NET 10 microservices for employees, users and attendance history: a gateway with role-based JWT, RabbitMQ events and storage chosen per service (Cassandra, SQL Server, MongoDB), built spec-first with Clean Architecture and CQRS.",
-      "demonstrates": "Event-driven design · Defense in depth · Polyglot persistence · Spec-driven development"
+      "description": ".NET 10 microservices for employees, users and attendance history: a gateway that checks RS256 tokens issued only by the Users service (with single-use refresh tokens), RabbitMQ events, storage chosen per service (Cassandra, SQL Server, MongoDB) and an AI assistant (Claude) that answers attendance questions with the caller's own permissions. Built spec-first with Clean Architecture, CQRS and an end-to-end regression suite.",
+      "demonstrates": "Event-driven design · Defense in depth · Polyglot persistence · AI agent with tool use · Spec-driven development"
+    },
+    "identityPlatform": {
+      "description": "Multi-tenant OAuth2/OpenID Connect identity platform (Authorization Code + PKCE) built as polyglot microservices in .NET, Java, Go, Python and Node.js, with React and Angular front ends: SCIM provisioning, LDAP federation, risk-based MFA and near-real-time security auditing. Runs locally with Docker as the only requirement and has a Terraform path to Azure and AWS. The tenant-aware sign-in foundation is done; the remaining phases are under way.",
+      "demonstrates": "Multi-tenancy · OAuth2/OIDC · Kafka events and RabbitMQ commands · Resilience patterns · Architecture decision records"
+    },
+    "ragDocsApi": {
+      "description": "Retrieval-augmented generation (RAG) API: upload documents, ask questions and get answers grounded in those documents, with the sources behind each answer. Embedders and generators sit behind small interfaces (offline by default, OpenAI by configuration), and a \"no context, no answer\" guardrail refuses instead of guessing.",
+      "demonstrates": "RAG · Responsible-AI guardrails · Provider-agnostic design · Tested FastAPI service"
     },
     "eCommerceMajestic": {
       "description": "E-commerce with admin, seller and shopper roles, shopping cart and an AI chatbot: Go REST API, Angular 16 SPA, MySQL and MongoDB, deployed with containers on AWS behind load balancers.",
@@ -366,7 +377,7 @@
     },
     "employeeAttendanceControl": {
       "title": "EmployeeAttendanceControl — attendance microservices",
-      "context": "A system to manage employees, their user accounts and an auditable attendance history. Each concern has different access patterns and consistency needs, so each service owns its data and they collaborate through events.",
+      "context": "A system to manage employees, their user accounts and an auditable attendance history. Each concern has different access patterns and consistency needs, so each service owns its data and they collaborate through events. An AI assistant answers attendance questions in natural language, acting only with the caller's permissions.",
       "nodes": {
         "client": "HTTP client",
         "gateway": "API Gateway",
@@ -376,22 +387,25 @@
         "rabbit": "Message broker",
         "cassandra": "Users & roles store",
         "sql": "Employees & current state store",
-        "mongo": "Attendance history store"
+        "mongo": "Attendance history store",
+        "assistant": "AI assistant"
       },
       "interactions": {
         "i1": "sends every request with a JWT",
-        "i2": "authentication and user management (admin only)",
+        "i2": "sign-in, token refresh and user management (admin only)",
         "i3": "employee management and attendance updates",
         "i4": "attendance history queries",
         "i5": "publishes EmployeeCreateEvent and AttendanceStateChangedEvent",
         "i6": "creates the user account of every new employee",
         "i7": "appends each attendance change to the history",
-        "i8": "reads the history before updating the current state"
+        "i8": "reads the history before updating the current state",
+        "i9": "natural-language attendance questions",
+        "i10": "reads employees and attendances with the caller's token (read-only)"
       },
       "decisions": {
         "d1": {
-          "decision": "The gateway checks the JWT and the admin role, and every service validates the token again.",
-          "tradeOff": "Defense in depth: a service is never exposed without checks, at the cost of duplicated validation."
+          "decision": "Only the Users service issues tokens, signed with RS256; the gateway checks the JWT and the admin role, and every service validates it again with the public key it publishes (JWKS).",
+          "tradeOff": "Defense in depth with no shared secret: no other service can mint a token, at the cost of duplicated validation and key distribution."
         },
         "d2": {
           "decision": "Employee creation and attendance changes propagate as events over durable RabbitMQ queues.",

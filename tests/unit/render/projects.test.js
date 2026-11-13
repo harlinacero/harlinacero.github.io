@@ -13,7 +13,8 @@ describe('renderProjects', () => {
     const section = renderProjects(ctx);
 
     // Assert
-    expect(texts(section, '.project-card h3')).toEqual(['Microservices.Demo', 'EmployeeAttendanceControl', 'E-Commerce Majestic', 'EasyReportsIA', 'Medical Center']);
+    const names = [...section.querySelectorAll('.project-card h3')].map((title) => title.firstChild.textContent);
+    expect(names).toEqual(['Microservices.Demo', 'EmployeeAttendanceControl', 'Identity Platform', 'Ask My Docs', 'E-Commerce Majestic', 'EasyReportsIA', 'Medical Center']);
     const first = section.querySelector('[data-project="microservicesDemo"]');
     expect(first.querySelector('.project-card__description').textContent).toMatch(/^Plataforma de seguros/);
     expect(texts(first, '.chip')).toContain('RabbitMQ');
@@ -49,7 +50,7 @@ describe('renderProjects', () => {
 
   it('should show live demo when the project has a demo url', () => {
     // Arrange
-    const project = { ...contextFor('en').projects[4], demoUrl: 'https://example.org/demo' };
+    const project = { ...contextFor('en').projects.find((p) => p.id === 'medicalcenter'), demoUrl: 'https://example.org/demo' };
     const ctx = withProjects('en', [project]);
 
     // Act
@@ -100,5 +101,18 @@ describe('renderProjects', () => {
     expect(section.querySelector('[data-project="medicalcenter"] [data-action="architecture"]')).toBeNull();
     const architecture = section.querySelector('[data-project="microservicesDemo"] [data-action="architecture"]');
     expect(architecture.getAttribute('href')).toBe('#case-microservicesDemo');
+  });
+
+  it('should show the in progress badge only when the project is still under construction', () => {
+    // Arrange
+    const ctx = contextFor('es');
+
+    // Act
+    const section = renderProjects(ctx);
+
+    // Assert
+    expect(section.querySelector('[data-project="identityPlatform"] h3 .badge').textContent).toBe('En construcción');
+    expect(section.querySelector('[data-project="ragDocsApi"] h3 .badge').textContent).toBe('En construcción');
+    expect(section.querySelector('[data-project="microservicesDemo"] h3 .badge')).toBeNull();
   });
 });

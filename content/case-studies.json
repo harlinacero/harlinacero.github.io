@@ -58,9 +58,10 @@
       {
         "id": "services",
         "nodes": [
-          { "id": "users", "tech": ".NET 10 · MediatR" },
+          { "id": "users", "tech": ".NET 10 · MediatR · RS256 · JWKS" },
           { "id": "employees", "tech": ".NET 10 · MediatR · Refit" },
-          { "id": "attendances", "tech": ".NET 10 · MediatR" }
+          { "id": "attendances", "tech": ".NET 10 · MediatR" },
+          { "id": "assistant", "tech": ".NET 10 · Claude · Refit" }
         ]
       },
       { "id": "messaging", "nodes": [{ "id": "rabbit", "tech": "RabbitMQ · durable queues" }] },
@@ -81,7 +82,9 @@
       { "id": "i5", "from": ["employees"], "to": ["rabbit"], "kind": "async" },
       { "id": "i6", "from": ["rabbit"], "to": ["users"], "kind": "async" },
       { "id": "i7", "from": ["rabbit"], "to": ["attendances"], "kind": "async" },
-      { "id": "i8", "from": ["employees"], "to": ["attendances"], "kind": "sync" }
+      { "id": "i8", "from": ["employees"], "to": ["attendances"], "kind": "sync" },
+      { "id": "i9", "from": ["gateway"], "to": ["assistant"], "kind": "sync" },
+      { "id": "i10", "from": ["assistant"], "to": ["employees", "attendances"], "kind": "sync" }
     ],
     "decisions": ["d1", "d2", "d3", "d4", "d5"],
     "qualities": ["security", "maintainability", "testability", "consistency"]

@@ -37,6 +37,7 @@ function referencedPaths() {
   projects.forEach((project) => {
     paths.push(`projects.${project.id}.description`, `projects.${project.id}.demonstrates`);
     if (project.mainLabelKey) paths.push(project.mainLabelKey);
+    if (project.status === 'inProgress') paths.push('ui.projects.inProgress');
     project.companions.forEach((companion) => paths.push(companion.labelKey));
   });
   caseStudies.forEach((study) => {
@@ -75,7 +76,7 @@ describe('language-neutral content data', () => {
     const repos = projects.flatMap((project) => [project.repo, ...project.companions.map((c) => c.repo)]);
 
     // Assert
-    expect(ids).toEqual(['microservicesDemo', 'employeeAttendanceControl', 'eCommerceMajestic', 'easyReportsIA', 'medicalcenter']);
+    expect(ids).toEqual(['microservicesDemo', 'employeeAttendanceControl', 'identityPlatform', 'ragDocsApi', 'eCommerceMajestic', 'easyReportsIA', 'medicalcenter']);
     excluded.forEach((name) => expect(repos.some((repo) => repo.endsWith(`/${name}`))).toBe(false));
     repos.forEach((repo) => expect(repo).toMatch(/^https:\/\/github\.com\/harlinacero\/[\w.-]+$/));
   });

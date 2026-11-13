@@ -13,7 +13,8 @@ function codeLinks(project, t, newTabLabel) {
 function renderCard(project, t) {
   const newTabLabel = t('ui.actions.opensInNewTab');
   return h('article', { class: 'project-card glass reveal', 'data-project': project.id },
-    h('h3', {}, project.name),
+    h('h3', {}, project.name,
+      project.status === 'inProgress' ? h('span', { class: 'badge' }, t('ui.projects.inProgress')) : null),
     h('p', { class: 'project-card__description' }, t(`projects.${project.id}.description`)),
     h('p', { class: 'project-card__demonstrates' }, t(`projects.${project.id}.demonstrates`)),
     h('ul', { class: 'chips' }, project.tags.map((tag) => h('li', { class: 'chip' }, tag))),
